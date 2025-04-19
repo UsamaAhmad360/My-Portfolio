@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Modern QR Code Generator</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <style>
+    :root {
+      --bg-dark: #121826;
+      --container-dark: #1f2937;
+      --accent: #00c2ff;
+      --text-light: #f1f5f9;
+      --input-bg: #273549;
+      --button-bg: #00c2ff;
+      --button-hover: #00a8e0;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: var(--container-dark);
+      padding: 30px 20px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+    }
+
+    h1 {
+      color: var(--accent);
+      font-size: 1.8em;
+      margin-bottom: 20px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      border: none;
+      background-color: var(--input-bg);
+      color: var(--text-light);
+      font-size: 16px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    button {
+      background-color: var(--button-bg);
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      color: #000;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: var(--button-hover);
+    }
+
+    #qrcode {
+      margin-top: 10px;
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.5em;
+      }
+
+      input[type="text"] {
+        font-size: 14px;
+      }
+
+      button {
+        padding: 10px 16px;
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>QR Code Generator</h1>
+    <input type="text" id="text" placeholder="Enter text or URL" />
+    <div class="buttons">
+      <button onclick="generateQRCode()">Generate QR</button>
+      <button onclick="copyQRCode()">Copy QR Code</button>
+      <button onclick="downloadQRCode()">Download QR</button>
+    </div>
+    <div id="qrcode"></div>
+  </div>
+
+  <script>
+    function generateQRCode() {
+      const text = document.getElementById("text").value.trim();
+      const qrDiv = document.getElementById("qrcode");
+      qrDiv.innerHTML = "";
+
+      if (text) {
+        new QRCode(qrDiv, {
+          text: text,
+          width: 300,
+          height: 300,
+          colorDark: "#000000",
+          colorLight: "#ffffff", // White background for better scanning
+          correctLevel: QRCode.CorrectLevel.H
+        });
+      }
+    }
+
+    async function copyQRCode() {
+      const qrDiv = document.getElementById("qrcode");
+      const canvas = qrDiv.querySelector("canvas");
+
+      if (!canvas) {
+        alert("Please generate a QR code first.");
+        return;
+      }
+
+      try {
+        const blob = await new Promise(resolve =>
+          canvas.toBlob(resolve, "image/png")
+        );
+
+        await navigator.clipboard.write([
+          new ClipboardItem({ [blob.type]: blob })
+        ]);
+
+        alert("✅ QR Code copied to clipboard!");
+      } catch (err) {
+        console.error(err);
+        alert("❌ Unable to copy QR Code. Use the download button instead.");
+      }
+    }
+
+    function downloadQRCode() {
+      const qrDiv = document.getElementById("qrcode");
+      const canvas = qrDiv.querySelector("canvas");
+
+      if (!canvas) {
+        alert("Please generate a QR code first.");
+        return;
+      }
+
+      // Add white padding (quiet zone)
+      const padding = 20;
+      const size = canvas.width + padding * 2;
+      const paddedCanvas = document.createElement("canvas");
+      paddedCanvas.width = size;
+      paddedCanvas.height = size;
+
+      const ctx = paddedCanvas.getContext("2d");
+      ctx.fillStyle = "#ffffff"; // White background
+      ctx.fillRect(0, 0, size, size);
+      ctx.drawImage(canvas, padding, padding);
+
+      const link = document.createElement("a");
+      link.download = "qr_code.png";
+      link.href = paddedCanvas.toDataURL("image/png");
+      link.click();
+    }
+  </script>
+
+</body>
+</html>
