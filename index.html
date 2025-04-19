@@ -4,62 +4,88 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Your Name | Portfolio</title>
-  <!-- Link to stylesheet -->
   <link rel="stylesheet" href="styles.css" />
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <!-- Header & Navigation -->
+  <!-- Navigation Bar -->
   <header>
     <nav>
       <ul class="nav-links">
+        <li><a href="#landing">Home</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#skills">Skills</a></li>
         <li><a href="#contact">Contact</a></li>
-        <li><a href="resume.pdf" target="_blank">Resume</a></li>
+        <li><a href="Resume/resume.pdf" target="_blank">Resume</a></li>
       </ul>
     </nav>
   </header>
 
-  <!-- Hero Section -->
-  <section id="hero">
-    <div class="hero-content">
-      <h1 class="fade-in">Hello, I'm [Your Name]</h1>
-      <p class="fade-in delay">Aspiring Web Developer &amp; Junior Software Engineer</p>
+  <!-- Landing Page / Home Section (Full-page Animation) -->
+  <section id="landing">
+    <div class="animation-container">
+      <div id="sky"></div>
+      <div class="sun"></div>
+      <div class="moon"></div>
+      <div class="mountains"></div>
+      <div class="land"></div>
+      <div class="windmill"></div>
+      <div class="light"></div>
+      <div class="blades"></div>
+      <div class="star star-1"></div>
+      <div class="star star-2"></div>
+      <div class="star star-3"></div>
+      <div class="shooting-star"></div>
+      <div class="tree"></div>
+    </div>
+    <div class="enter-container">
+      <button onclick="document.getElementById('about').scrollIntoView({ behavior: 'smooth' });">
+        Enter Site
+      </button>
     </div>
   </section>
 
   <!-- About Section -->
-  <section id="about" class="fade-section">
+  <section id="about" class="content-section fade-section">
     <h2>About Me</h2>
     <p>
-      Hi, I'm [Your Name], a BS Computer Science graduate passionate about creating engaging and efficient web applications. I have experience in HTML, CSS, JavaScript, and modern frameworks, and I'm always eager to learn new technologies.
+      Hi, I'm Usama Ahmad, a recent Computer Science graduate with a strong interest in web development. I have hands-on experience with front-end technologies like HTML, CSS, and
+      JavaScript, and I’m passionate about creating responsive,
+      user-friendly websites. I'm eager to continue learning and
+      grow as a developer by contributing to exciting projects in
+      the web development field.
     </p>
-    <!-- Replace with your own profile image -->
-   <img src=" profile.webp" alt="Your Name" class="profile-img" />
+    <img src="profile.png" alt="Your Name" class="profile-img" />
   </section>
 
   <!-- Projects Section -->
-  <section id="projects" class="fade-section">
+  <section id="projects" class="content-section fade-section">
     <h2>Projects</h2>
-    <div class="project">
-      <h3>Project Title 1</h3>
-      <p>A brief description of the project, including technologies used.</p>
-      <a href="https://yourusername.github.io/project1" target="_blank">Live Demo</a>
-      <a href="https://github.com/yourusername/project1" target="_blank">Source Code</a>
-    </div>
-    <div class="project">
-      <h3>Project Title 2</h3>
-      <p>A brief description of the project, including technologies used.</p>
-      <a href="https://yourusername.github.io/project2" target="_blank">Live Demo</a>
-      <a href="https://github.com/yourusername/project2" target="_blank">Source Code</a>
+    <div class="projects-grid">
+      <div class="project-card">
+        <h3>QR Code Generator</h3>
+        <p>Brief description of project 1, including technologies used.</p>
+        <div class="project-links">
+          <a href="/Projects/QR Code Generator/QR.html" target="_blank">Live Demo</a>
+          <a href="/Projects/QR Code Generator/QR.html" target="_blank">Source Code</a>
+        </div>
+      </div>
+      <div class="project-card">
+        <h3>Project Title 2</h3>
+        <p>Brief description of project 2, including technologies used.</p>
+        <div class="project-links">
+          <a href="https://yourusername.github.io/project2" target="_blank">Live Demo</a>
+          <a href="https://github.com/yourusername/project2" target="_blank">Source Code</a>
+        </div>
+      </div>
+      <!-- Add more project cards as needed -->
     </div>
   </section>
 
   <!-- Skills Section -->
-  <section id="skills" class="fade-section">
+  <section id="skills" class="content-section fade-section">
     <h2>Skills &amp; Technologies</h2>
     <ul class="skills-list">
       <li>HTML5</li>
@@ -67,50 +93,36 @@
       <li>JavaScript</li>
       <li>React</li>
       <li>Node.js</li>
-      <!-- Add additional skills as needed -->
+      <!-- Add additional skills -->
     </ul>
   </section>
 
   <!-- Contact Section -->
-  <section id="contact" class="fade-section">
+  <section id="contact" class="content-section fade-section">
     <h2>Contact</h2>
-    <p>If you’d like to get in touch, feel free to drop me a message!</p>
-    <ul class="contact-info">
-      <li>Email: <a href="mailto:youremail@example.com">youremail@example.com</a></li>
-      <li>
-        LinkedIn: <a href="https://www.linkedin.com/in/yourprofile" target="_blank">yourprofile</a>
-      </li>
-      <li>
-        GitHub: <a href="https://github.com/yourusername" target="_blank">yourusername</a>
-      </li>
-    </ul>
+    <p>If you'd like to get in touch, please fill out the form below or use the links provided.</p>
+    <div class="contact-container">
+      <form id="emailForm">
+        <input type="text" id="name" placeholder="Your Name" required />
+        <input type="email" id="email" placeholder="Your Email" required />
+        <textarea id="message" rows="5" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+      
+      <div class="social-links">
+        <a href="https://www.linkedin.com/in/yourprofile" target="_blank">LinkedIn</a>
+        <a href="https://github.com/yourusername" target="_blank">GitHub</a>
+        <!-- Add other social links if needed -->
+      </div>
+    </div>
   </section>
 
   <!-- Footer -->
   <footer>
-    <p>&copy; 2025 [Your Name]. All rights reserved.</p>
+    <p>&copy; 2025 Usama Ahmad . All rights reserved.</p>
   </footer>
 
-  <!-- Optional JavaScript for scroll animations -->
-  <script>
-    // Fade-in effect on scroll using Intersection Observer API
-    const faders = document.querySelectorAll('.fade-section');
-    const appearOptions = {
-      threshold: 0.2,
-      rootMargin: "0px 0px -50px 0px"
-    };
-
-    const appearOnScroll = new IntersectionObserver(function(entries, observer) {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('appear');
-        observer.unobserve(entry.target);
-      });
-    }, appearOptions);
-
-    faders.forEach(fader => {
-      appearOnScroll.observe(fader);
-    });
-  </script>
+  <!-- JavaScript for fade-in on scroll -->
+  <script src="script.js"></script>
 </body>
 </html>
